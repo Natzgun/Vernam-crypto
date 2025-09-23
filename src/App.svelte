@@ -5,6 +5,7 @@
   let modo = 'cifrar';
   let error = '';
   let mostrarInfo = false;
+  let mostrarTeam = false;
   let animacionActiva = false;
   let mensajeCifradoHex = '';
 
@@ -70,7 +71,6 @@
     return resultado.join('');
   }
 
-  // Función XOR para descifrar
   function xorDescifrar(cifradoHex, clave) {
     if (cifradoHex.length % 2 !== 0) {
       throw new Error('El texto cifrado en hex no es válido.');
@@ -92,7 +92,6 @@
     return resultado;
   }
 
-  // Cifrar mensaje
   function cifrar() {
     if (!validarAscii(mensaje) || !validarAscii(clave)) {
       error = 'Solo se permiten caracteres ASCII imprimibles.';
@@ -119,7 +118,6 @@
     }, 600);
   }
 
-  // Descifrar mensaje
   function descifrar() {
     if (!validarHex(mensaje)) {
       error = 'El texto cifrado debe estar en formato hexadecimal válido.';
@@ -145,7 +143,6 @@
     }, 600);
   }
 
-  // Cambiar modo
   function toggleModo(nuevoModo) {
     modo = nuevoModo;
     error = '';
@@ -155,7 +152,6 @@
     mensajeCifradoHex = '';
   }
 
-  // Limpiar campos
   function limpiarCampos() {
     mensaje = '';
     clave = '';
@@ -167,7 +163,6 @@
   // Copiar resultado al portapapeles
   function copiarResultado() {
     navigator.clipboard.writeText(resultado).then(() => {
-      // Mostrar feedback visual temporal
       const originalResultado = resultado;
       resultado = '📋 ¡Copiado al portapapeles!';
       setTimeout(() => {
@@ -187,7 +182,6 @@
 
 <main>
   <div class="min-h-screen bg-black p-4">
-    <!-- Header con animación -->
     <div class="text-center mb-8 animate-fade-in">
       <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
         🔐 Cifrado Vernam
@@ -197,7 +191,6 @@
       </p>
     </div>
 
-    <!-- Selector de modo con animación -->
     <div class="max-w-4xl mx-auto mb-6">
       <div class="flex justify-center space-x-4 mb-6">
         <button
@@ -296,7 +289,6 @@
             </div>
           </div>
 
-          <!-- Botones de acción -->
           <div class="flex flex-wrap gap-3">
             <button
               on:click={generarClave}
@@ -483,6 +475,31 @@
             </div>
           </div>
         </div>
+              <!-- Panel de información -->
+      <div class="space-y-6">
+        <!-- Información educativa -->
+        <div class="bg-gray-900/90 backdrop-blur-sm rounded-2xl shadow-xl shadow-cyan-500/10 p-6 border border-cyan-400/20">
+          <button
+            on:click={() => mostrarTeam = !mostrarTeam}
+            class="w-full flex items-center justify-between text-lg font-semibold text-cyan-300 mb-4 hover:text-cyan-400 transition-colors"
+          >
+            <span class="flex items-center">
+              📚 Team
+            </span>
+            <span class="transform transition-transform duration-300 {mostrarTeam ? 'rotate-180' : ''}">
+              ⌄
+            </span>
+          </button>
+          <div class="space-y-4 transition-all duration-500 overflow-hidden {mostrarTeam ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'}">
+            <h4 class="font-semibold text-cyan-400 mb-3">👨‍💻 Grupo 4 - Seguridad en Computación</h4>
+            <div class="space-y-3 text-sm text-gray-300">
+              <ol>
+                <li>Wilson Mamani Casilla</li>
+                <li>Arleen Ferro Vasquez</li>
+                <li>Erick Malcoaccha Díaz</li>
+                <li>Melany Cahuana Nina</li>
+              </ol>
+            </div>
       </div>
     </div>
   </div>
