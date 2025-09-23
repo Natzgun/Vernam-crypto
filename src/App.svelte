@@ -186,9 +186,6 @@
       <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-green-400 to-cyan-400 bg-clip-text text-transparent">
         🔐 Cifrado Vernam
       </h1>
-      <p class="text-green-300 text-lg">
-        Implementación interactiva del cifrado perfectamente seguro
-      </p>
     </div>
 
     <div class="max-w-4xl mx-auto mb-6">
